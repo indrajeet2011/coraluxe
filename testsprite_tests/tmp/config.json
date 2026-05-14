@@ -1,0 +1,20 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "executionArgs": {
+    "projectName": "frontend",
+    "projectPath": "/var/www/html/pyproject/coraluxe/frontend",
+    "testIds": [
+      "TC001",
+      "TC004"
+    ],
+    "additionalInstruction": "Also add and run a test case for the Newsletter SignUp button in the Footer: verify that clicking SignUp without entering an email shows a validation prompt asking for email. This maps to PRD requirement: When click SignUp button, Please first enter email.",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-XBX_zGLQeOk17sWH2OmXHjnJCszmKdwZ8HOemDZIcSsKVOYFTBjERLrwrCwVVjvAdelxoOszCc2yicqjN2Yo1ARUWeKhQXuyjB_WfLstnoTI7fuV7vBmfXbdMHEEA7F_hjk"
+    }
+  },
+  "serverPort": 45997
+}

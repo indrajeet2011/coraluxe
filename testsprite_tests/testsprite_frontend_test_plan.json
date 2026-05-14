@@ -1,0 +1,286 @@
+[
+  {
+    "id": "TC001",
+    "title": "Navigate to the home section from the top navigation",
+    "description": "A visitor can return to the home section from the top navigation and see the landing page start of the site.",
+    "category": "Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the home link in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the home section is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Open the Contact section from the top navigation",
+    "description": "A visitor can jump from the homepage to the Contact section and see the contact form area.",
+    "category": "Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Contact link in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the Contact section is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Open the About section from the top navigation",
+    "description": "A visitor can jump from the homepage to the About section and see the correct landing-page content.",
+    "category": "Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the About link in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the About section is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Validate that Name and Email are required in the contact form",
+    "description": "A lead who tries to submit the contact form without Name and Email sees validation and can correct the fields before resubmitting successfully.",
+    "category": "Contact Form",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the Mobile field with a valid mobile number"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the Subject field with a valid subject"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the Message field with a valid message"
+      },
+      {
+        "type": "action",
+        "description": "Click the Send Message button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify validation prompts for the missing Name and Email fields are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Submit a complete inquiry through the contact form",
+    "description": "A lead can fill out all contact fields and successfully submit an inquiry from the contact form.",
+    "category": "Contact Form",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the Name field with a valid name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the Email field with a valid email"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the Mobile field with a valid mobile number"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the Subject field with a valid subject"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the Message field with a valid message"
+      },
+      {
+        "type": "action",
+        "description": "Click the Send Message button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a successful submission confirmation is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Continue browsing from the hero with Explore More",
+    "description": "A visitor can use the Explore More call to action and reach additional landing page content.",
+    "category": "Hero Carousel",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Explore More button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify additional landing page content is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Access the Rooms dropdown menu",
+    "description": "A visitor can open the Rooms dropdown and see its menu options.",
+    "category": "Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Rooms dropdown in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the Rooms menu options are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Access the Blog dropdown menu",
+    "description": "A visitor can open the Blog dropdown and see its menu options.",
+    "category": "Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Blog dropdown in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the Blog menu options are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Access the Pages dropdown menu",
+    "description": "A visitor can open the Pages dropdown and see its menu options.",
+    "category": "Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Pages dropdown in the top navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the Pages menu options are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "Move the hero carousel to the next slide",
+    "description": "A visitor can use the carousel next control and see the visible hero content change to the next slide.",
+    "category": "Hero Carousel",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the next carousel control"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the hero carousel content changes to a different slide"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "Move the hero carousel to the previous slide",
+    "description": "A visitor can use the carousel previous control and see the visible hero content change to the prior slide.",
+    "category": "Hero Carousel",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the previous carousel control"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the hero carousel content changes to a different slide"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Open the pro version prompt from the navigation",
+    "description": "A visitor can use the pro version call to action and see the purchase prompt.",
+    "category": "Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the Buy Pro Version button"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a pro version prompt is displayed"
+      }
+    ],
+    "priority": "Medium"
+  }
+]
