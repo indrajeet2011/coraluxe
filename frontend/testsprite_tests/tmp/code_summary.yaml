@@ -1,0 +1,54 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - Next.js
+  - React
+  - Bootstrap 5
+  - Tailwind CSS
+routes:
+  - path: /
+    file: src/app/page.tsx
+    auth_required: false
+    description: Main landing page with all sections
+features:
+  - name: Navigation
+    description: Top navigation bar with links to sections and dropdown menus
+    files:
+      - src/components/Navbar.tsx
+    entry_route: /
+    user_interactions:
+      - Click on Home link
+      - Click on About link
+      - Click on Rooms dropdown
+      - Click on Blog dropdown
+      - Click on Pages dropdown
+      - Click on Contact link
+      - Click on Buy Pro Version button
+    api_calls: []
+    auth_required: false
+  - name: Hero Carousel
+    description: Hero section with image carousel and Explore More button
+    files:
+      - src/components/Hero.tsx
+    entry_route: /
+    user_interactions:
+      - Click previous/next carousel controls
+      - Click Explore More button
+    api_calls: []
+    auth_required: false
+  - name: Contact Form
+    description: Contact form with Name, Email, Mobile, Subject, and Message fields
+    files:
+      - src/components/Contact.tsx
+    entry_route: /
+    user_interactions:
+      - Fill Name input field
+      - Fill Email input field
+      - Fill Mobile input field
+      - Fill Subject input field
+      - Fill Message textarea
+      - Click Send Message button
+    api_calls: []
+    auth_required: false
+known_limitations: []
