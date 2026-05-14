@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "public/lib/**",
+    "testsprite_tests/**",
   ]),
 ]);
 

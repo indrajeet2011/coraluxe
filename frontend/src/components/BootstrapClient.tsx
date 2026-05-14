@@ -16,8 +16,11 @@ export default function BootstrapClient() {
     };
     spinner();
 
-    if (typeof (window as any).WOW !== "undefined") {
-      new (window as any).WOW().init();
+    interface WOWClass {
+      new(): { init: () => void };
+    }
+    if (typeof (window as { WOW?: WOWClass }).WOW !== "undefined") {
+      new (window as unknown as { WOW: WOWClass }).WOW().init();
     }
 
     const handleScroll = () => {

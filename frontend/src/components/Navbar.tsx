@@ -1,11 +1,13 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark px-lg-5">
-      <a href="/" className="navbar-brand ms-4 ms-lg-0">
+      <Link href="/" className="navbar-brand ms-4 ms-lg-0">
         <h1 className="mb-0 text-primary">Coraluxe</h1>
-      </a>
+      </Link>
       <button
         type="button"
         className="navbar-toggler me-4"
@@ -16,7 +18,7 @@ export default function Navbar() {
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
         <div className="navbar-nav mx-auto p-4 p-lg-0">
-          <a href="/" className="nav-item nav-link active">Home</a>
+          <Link href="/" className="nav-item nav-link active">Home</Link>
           <a href="#" className="nav-item nav-link">About</a>
           <div className="nav-item dropdown">
             <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Rooms</a>
