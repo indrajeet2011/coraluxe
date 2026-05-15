@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <div className="container-fluid py-6">
+    <div id="about" className="container-fluid py-6">
       <div className="container">
         <div className="row g-5">
           <div className="col-lg-5 wow fadeIn" data-wow-delay="0.1s" style={{ minHeight: "400px" }}>

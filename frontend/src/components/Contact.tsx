@@ -2,13 +2,13 @@
 
 export default function Contact() {
   return (
-    <div className="container-fluid bg-light overflow-hidden px-lg-0">
+    <div id="contact" className="container-fluid bg-light overflow-hidden px-lg-0">
       <div className="container contact px-lg-0">
         <div className="row g-0 mx-lg-0">
           <div className="col-lg-8 contact-text py-5 wow fadeIn" data-wow-delay="0.3s">
             <div className="p-lg-5 ps-lg-0">
               <p className="fs-4 font-dancing-script text-primary mb-0">Contact</p>
-              <h1 className="display-4 mb-4">Get in Touch Today</h1>
+              <h1 className="display-4 mb-4">Get in Touch Today Test Sprite</h1>
               <p className="fs-4">
                 Receive messages instantly with our PHP and Ajax contact form - available in the{" "}
                 <a href="https://htmlcodex.com/downloading/?item=3928">Pro Version</a> only.
