@@ -19,7 +19,7 @@ export default function Navbar() {
       <div className="collapse navbar-collapse" id="navbarCollapse">
         <div className="navbar-nav mx-auto p-4 p-lg-0">
           <Link href="/" className="nav-item nav-link active">Home</Link>
-          <a href="#" className="nav-item nav-link">About</a>
+          <a href="#" className="nav-item nav-link" onClick={(e) => { e.preventDefault(); document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }); }}>About</a>
           <div className="nav-item dropdown">
             <a href="#" className="nav-link dropdown-toggle" data-bs-toggle="dropdown">Rooms</a>
             <div className="dropdown-menu m-0">
@@ -47,7 +47,7 @@ export default function Navbar() {
               <a href="#" className="dropdown-item">404 Page</a>
             </div>
           </div>
-          <a href="#" className="nav-item nav-link">Contact</a>
+          <a href="#" className="nav-item nav-link" onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}>Contact</a>
         </div>
         <a
           className="btn btn-primary d-none d-lg-flex"

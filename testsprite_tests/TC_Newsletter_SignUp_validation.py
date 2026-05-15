@@ -1,7 +1,5 @@
 import asyncio
-import re
-from playwright import async_api
-from playwright.async_api import expect
+from playwright.async_api import async_playwright, expect
 
 async def run_test():
     pw = None
@@ -9,7 +7,7 @@ async def run_test():
     context = None
 
     try:
-        pw = await async_api.async_playwright().start()
+        pw = await async_playwright().start()
         browser = await pw.chromium.launch(
             headless=True,
             args=[
@@ -29,13 +27,11 @@ async def run_test():
         except Exception:
             pass
 
-        # Click the newsletter SignUp button without entering an email
-        # to trigger the validation prompt for the required email field.
         signup_btn = page.locator("button:has-text('SignUp')").first
+        await signup_btn.scroll_into_view_if_needed()
         await signup_btn.wait_for(state="visible", timeout=10000)
         await signup_btn.click()
 
-        # Verify that the email input shows a validation message
         email_input = page.locator("form:has(button:has-text('SignUp')) input[type='email']").first
         validation_message = await email_input.evaluate("el => el.validationMessage")
         assert validation_message and len(validation_message) > 0, \

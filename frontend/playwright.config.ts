@@ -1,13 +1,13 @@
 import { defineConfig } from "@playwright/test";
 
 export default defineConfig({
-  testDir: "./e2e",
+  testDir: "./tests",
   fullyParallel: false,
   retries: 0,
   workers: 1,
   reporter: [["list"], ["html", { open: "never" }]],
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: "https://coraluxe-seven.vercel.app",
     headless: true,
   },
   projects: [
