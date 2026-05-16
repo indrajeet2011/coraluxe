@@ -1,0 +1,20 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "scope": "codebase",
+  "localEndpoint": "http://localhost:3000",
+  "executionArgs": {
+    "projectName": "frontend",
+    "projectPath": "/var/www/html/pyproject/coraluxe/frontend",
+    "testIds": [
+      "TC001",
+      "TC004"
+    ],
+    "additionalInstruction": "",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-XBX_zGLQeOk17sWH2OmXHjnJCszmKdwZ8HOemDZIcSsKVOYFTBjERLrwrCwVVjvAdelxoOszCc2yicqjN2Yo1ARUWeKhQXuyjB_WfLstnoTI7fuV7vBmfXbdMHEEA7F_hjk"
+    }
+  },
+  "serverPort": 37505
+}
