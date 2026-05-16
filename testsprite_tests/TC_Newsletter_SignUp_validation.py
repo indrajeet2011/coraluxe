@@ -18,7 +18,10 @@ async def run_test():
                 "--single-process"
             ],
         )
-        context = await browser.new_context()
+        context = await browser.new_context(
+            record_video_dir="testsprite_tests/videos/",
+            record_video_size={"width": 1280, "height": 720},
+        )
         context.set_default_timeout(15000)
         page = await context.new_page()
 
@@ -40,6 +43,11 @@ async def run_test():
             f"Expected validation message, got: '{validation_message}'"
 
         await asyncio.sleep(3)
+
+        # Save video before closing context
+        await page.close()
+        video_path = await page.video.path()
+        print(f"Video saved to: {video_path}")
 
     finally:
         if context:
