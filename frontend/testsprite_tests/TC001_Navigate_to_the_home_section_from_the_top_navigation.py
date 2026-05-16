@@ -25,7 +25,10 @@ async def run_test():
         )
 
         # Create a new browser context (like an incognito window)
-        context = await browser.new_context()
+        context = await browser.new_context(
+            record_video_dir="testsprite_tests/videos/",
+            record_video_size={"width": 1280, "height": 720},
+        )
         # Wider default timeout to match the agent's DOM-stability budget;
         # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.
         context.set_default_timeout(15000)
@@ -53,6 +56,11 @@ async def run_test():
         current_url = await frame.evaluate("() => window.location.href")
         assert current_url is not None, "Test completed successfully"
         await asyncio.sleep(5)
+
+        # Save video before closing context
+        await page.close()
+        video_path = await page.video.path()
+        print(f"Video saved to: {video_path}")
 
     finally:
         if context:
