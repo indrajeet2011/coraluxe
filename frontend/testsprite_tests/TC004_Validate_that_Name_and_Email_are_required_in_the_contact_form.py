@@ -1,5 +1,6 @@
 import asyncio
 import re
+import os
 from playwright import async_api
 from playwright.async_api import expect
 
@@ -34,7 +35,8 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:3000")
+        base_url = os.getenv("BASE_URL", "https://coraluxe-seven.vercel.app/")
+        await page.goto(base_url, wait_until="domcontentloaded", timeout=45000)
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
@@ -42,33 +44,40 @@ async def run_test():
         
         # -> Click the 'Contact' link in the top navigation to open the contact form
         # link "Contact"
-        elem = page.locator("xpath=/html/body/div[3]/nav/div/div/a[3]").nth(0)
+        elem = page.locator("nav").get_by_role("link", name="Contact", exact=True).first
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         
         # -> Fill the Mobile field with a valid number, fill Subject and Message, then click Send Message to trigger validation for missing Name and Email.
         # text input placeholder="Mobile"
-        elem = page.locator("xpath=/html/body/div[9]/div/div/div/div/form/div[3]/div/input").nth(0)
+        elem = page.locator("#contact #mobile")
         await elem.wait_for(state="visible", timeout=10000)
         await elem.fill("+1234567890")
         
         # -> Fill the Mobile field with a valid number, fill Subject and Message, then click Send Message to trigger validation for missing Name and Email.
         # text input placeholder="Subject"
-        elem = page.locator("xpath=/html/body/div[9]/div/div/div/div/form/div[4]/div/input").nth(0)
+        elem = page.locator("#contact #subject")
         await elem.wait_for(state="visible", timeout=10000)
         await elem.fill("Test Subject")
         
         # -> Fill the Mobile field with a valid number, fill Subject and Message, then click Send Message to trigger validation for missing Name and Email.
         # placeholder="Message"
-        elem = page.locator("xpath=/html/body/div[9]/div/div/div/div/form/div[5]/div/textarea").nth(0)
+        elem = page.locator("#contact #message")
         await elem.wait_for(state="visible", timeout=10000)
         await elem.fill("This is a test message to verify validation behavior when Name and Email are missing.")
         
         # -> Fill the Mobile field with a valid number, fill Subject and Message, then click Send Message to trigger validation for missing Name and Email.
         # button "Send Message"
-        elem = page.locator("xpath=/html/body/div[9]/div/div/div/div/form/div[6]/button").nth(0)
+        elem = page.locator("#contact form").get_by_role("button", name="Send Message", exact=True)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
+
+        name_input = page.locator("#contact #name")
+        email_input = page.locator("#contact #email")
+        name_validation_message = await name_input.evaluate("el => el.validationMessage")
+        email_validation_message = await email_input.evaluate("el => el.validationMessage")
+        assert name_validation_message and len(name_validation_message) > 0, "Expected required validation message for Name"
+        assert email_validation_message and len(email_validation_message) > 0, "Expected required validation message for Email"
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

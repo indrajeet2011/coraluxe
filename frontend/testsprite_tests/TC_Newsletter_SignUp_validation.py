@@ -1,4 +1,5 @@
 import asyncio
+import os
 from playwright.async_api import async_playwright, expect
 
 async def run_test():
@@ -21,7 +22,8 @@ async def run_test():
         context.set_default_timeout(15000)
         page = await context.new_page()
 
-        await page.goto("http://localhost:3000")
+        base_url = os.getenv("BASE_URL", "https://coraluxe-seven.vercel.app/")
+        await page.goto(base_url, wait_until="domcontentloaded", timeout=45000)
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:

@@ -1,5 +1,6 @@
 import asyncio
 import re
+import os
 from playwright import async_api
 from playwright.async_api import expect
 
@@ -34,7 +35,8 @@ async def run_test():
 
         # Interact with the page elements to simulate user flow
         # -> navigate
-        await page.goto("http://localhost:3000")
+        base_url = os.getenv("BASE_URL", "https://coraluxe-seven.vercel.app/")
+        await page.goto(base_url, wait_until="domcontentloaded", timeout=45000)
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
@@ -42,7 +44,7 @@ async def run_test():
         
         # -> Click the top-navigation 'Home' link and verify the landing hero text 'Escape to Pure Paradise' is visible.
         # link "Home"
-        elem = page.locator("xpath=/html/body/div[3]/nav/div/div/a").nth(0)
+        elem = page.locator("nav").get_by_role("link", name="Home", exact=True).first
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         
