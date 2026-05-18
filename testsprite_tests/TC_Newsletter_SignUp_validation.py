@@ -6,8 +6,14 @@ async def run_test():
     pw = None
     browser = None
     context = None
+    page = None
 
     try:
+        # Ensure the videos directory exists with an absolute path
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        video_dir = os.path.join(script_dir, "videos")
+        os.makedirs(video_dir, exist_ok=True)
+
         pw = await async_playwright().start()
         browser = await pw.chromium.launch(
             headless=True,
@@ -19,7 +25,7 @@ async def run_test():
             ],
         )
         context = await browser.new_context(
-            record_video_dir="testsprite_tests/videos/",
+            record_video_dir=video_dir,
             record_video_size={"width": 1280, "height": 720},
         )
         context.set_default_timeout(15000)
@@ -44,17 +50,21 @@ async def run_test():
 
         await asyncio.sleep(3)
 
-        # Save video before closing context
+        # Close page first
         await page.close()
-        video_path = await page.video.path()
-        print(f"Video saved to: {video_path}")
 
     finally:
+        # Close context first to finalize video recording
         if context:
             await context.close()
         if browser:
             await browser.close()
         if pw:
             await pw.stop()
+
+    # Video is now saved after context.close()
+    if page and page.video:
+        video_path = await page.video.path()
+        print(f"Video saved to: {video_path}")
 
 asyncio.run(run_test())
