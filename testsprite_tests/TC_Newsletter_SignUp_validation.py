@@ -9,8 +9,10 @@ async def run_test():
     page = None
 
     try:
-        # Ensure the videos directory exists with an absolute path
-        script_dir = os.path.dirname(os.path.abspath(__file__))
+        try:
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+        except NameError:
+            script_dir = os.path.abspath(os.getcwd())
         video_dir = os.path.join(script_dir, "videos")
         os.makedirs(video_dir, exist_ok=True)
 
@@ -50,11 +52,9 @@ async def run_test():
 
         await asyncio.sleep(3)
 
-        # Close page first
         await page.close()
 
     finally:
-        # Close context first to finalize video recording
         if context:
             await context.close()
         if browser:
@@ -62,7 +62,6 @@ async def run_test():
         if pw:
             await pw.stop()
 
-    # Video is now saved after context.close()
     if page and page.video:
         video_path = await page.video.path()
         print(f"Video saved to: {video_path}")

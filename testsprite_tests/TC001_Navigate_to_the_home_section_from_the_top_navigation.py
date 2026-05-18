@@ -11,15 +11,15 @@ async def run_test():
     page = None
 
     try:
-        # Ensure the videos directory exists with an absolute path
-        script_dir = os.path.dirname(os.path.abspath(__file__))
+        try:
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+        except NameError:
+            script_dir = os.path.abspath(os.getcwd())
         video_dir = os.path.join(script_dir, "videos")
         os.makedirs(video_dir, exist_ok=True)
 
-        # Start a Playwright session in asynchronous mode
         pw = await async_api.async_playwright().start()
 
-        # Launch a Chromium browser in headless mode with custom arguments
         browser = await pw.chromium.launch(
             headless=True,
             args=[
@@ -30,44 +30,33 @@ async def run_test():
             ],
         )
 
-        # Create a new browser context (like an incognito window)
         context = await browser.new_context(
             record_video_dir=video_dir,
             record_video_size={"width": 1280, "height": 720},
         )
-        # Wider default timeout to match the agent's DOM-stability budget;
-        # auto-waiting Playwright APIs (expect, locator.wait_for) inherit this.
         context.set_default_timeout(15000)
 
-        # Open a new page in the browser context
         page = await context.new_page()
 
-        # Interact with the page elements to simulate user flow
-        # -> navigate
         base_url = os.getenv("BASE_URL", "https://coraluxe-seven.vercel.app/")
         await page.goto(base_url, wait_until="domcontentloaded", timeout=45000)
         try:
             await page.wait_for_load_state("domcontentloaded", timeout=5000)
         except Exception:
             pass
-        
-        # -> Click the top-navigation 'Home' link and verify the landing hero text 'Escape to Pure Paradise' is visible.
-        # link "Home"
+
         elem = page.locator("nav").get_by_role("link", name="Home", exact=True).first
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
-        
-        # --> Test passed — verified by AI agent
+
         frame = context.pages[-1]
         current_url = await frame.evaluate("() => window.location.href")
         assert current_url is not None, "Test completed successfully"
         await asyncio.sleep(5)
 
-        # Close page first
         await page.close()
 
     finally:
-        # Close context first to finalize video recording
         if context:
             await context.close()
         if browser:
@@ -75,10 +64,8 @@ async def run_test():
         if pw:
             await pw.stop()
 
-    # Video is now saved after context.close()
     if page and page.video:
         video_path = await page.video.path()
         print(f"Video saved to: {video_path}")
 
 asyncio.run(run_test())
-    
