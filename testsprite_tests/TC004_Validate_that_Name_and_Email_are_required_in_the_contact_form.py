@@ -57,30 +57,25 @@ async def run_test():
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
         
-        # -> Fill the Mobile field with a valid number, fill Subject and Message, then click Send Message to trigger validation for missing Name and Email.
-        # text input placeholder="Mobile"
+        # Step 1: Fill Mobile, Subject, Message (leave Name and Email empty)
         elem = page.locator("#contact #mobile")
         await elem.wait_for(state="visible", timeout=10000)
         await elem.fill("+1234567890")
         
-        # -> Fill the Mobile field with a valid number, fill Subject and Message, then click Send Message to trigger validation for missing Name and Email.
-        # text input placeholder="Subject"
         elem = page.locator("#contact #subject")
         await elem.wait_for(state="visible", timeout=10000)
         await elem.fill("Test Subject")
         
-        # -> Fill the Mobile field with a valid number, fill Subject and Message, then click Send Message to trigger validation for missing Name and Email.
-        # placeholder="Message"
         elem = page.locator("#contact #message")
         await elem.wait_for(state="visible", timeout=10000)
         await elem.fill("This is a test message to verify validation behavior when Name and Email are missing.")
         
-        # -> Fill the Mobile field with a valid number, fill Subject and Message, then click Send Message to trigger validation for missing Name and Email.
-        # button "Send Message"
+        # Step 2: Click Send Message — validation should fire for missing Name and Email
         elem = page.locator("#contact form").get_by_role("button", name="Send Message", exact=True)
         await elem.wait_for(state="visible", timeout=10000)
         await elem.click()
 
+        # Step 3: Verify validation messages appear on Name and Email
         name_input = page.locator("#contact #name")
         email_input = page.locator("#contact #email")
         name_validation_message = await name_input.evaluate("el => el.validationMessage")
@@ -88,11 +83,18 @@ async def run_test():
         assert name_validation_message and len(name_validation_message) > 0, "Expected required validation message for Name"
         assert email_validation_message and len(email_validation_message) > 0, "Expected required validation message for Email"
         
-        # --> Test passed — verified by AI agent
-        frame = context.pages[-1]
-        current_url = await frame.evaluate("() => window.location.href")
-        assert current_url is not None, "Test completed successfully"
-        await asyncio.sleep(5)
+        # Step 4: Correct the fields — fill Name and Email
+        await name_input.fill("John Doe")
+        await email_input.fill("john@example.com")
+        
+        # Step 5: Resubmit — now all fields are valid
+        elem = page.locator("#contact form").get_by_role("button", name="Send Message", exact=True)
+        await elem.click()
+        
+        # Step 6: Verify success message is displayed
+        await asyncio.sleep(1)
+        success_msg = page.locator("#success-message")
+        await success_msg.wait_for(state="visible", timeout=5000)
 
         # Close page first
         await page.close()
